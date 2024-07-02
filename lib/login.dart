@@ -14,6 +14,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:swiftcoins/home.dart';
 
 //add logic for fetching from backend and display
@@ -26,7 +27,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _phoneController = TextEditingController();
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +44,6 @@ class _LoginPageState extends State<LoginPage> {
               Column(
                 children: <Widget>[
                   CircleAvatar(
-
                     radius: 70,
                     child: Image.asset(
                       'assets/swiftlogo.png',
@@ -121,7 +121,6 @@ class _LoginPageState extends State<LoginPage> {
 
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                
                 children: <Widget>[
                   ElevatedButton(
                     style: TextButton.styleFrom(
@@ -138,10 +137,8 @@ class _LoginPageState extends State<LoginPage> {
                         MaterialPageRoute(
                             builder: (context) => const EnterPin()),
                       );
-                      
                     },
                   ),
-                  
                 ],
               ),
             ],
@@ -246,14 +243,19 @@ class _EnterPinState extends State<EnterPin> {
                         ),
                         child: const Text('Sign In'),
                         onPressed: () {
+                          Fluttertoast.showToast(
+                              msg: "Sign In Successful!",
+                              gravity: ToastGravity.CENTER,
+                              toastLength: Toast.LENGTH_LONG,
+                              fontSize: 15,
+                              backgroundColor:
+                                  Color.fromARGB(255, 227, 112, 5));
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => HomePage()),
+                            MaterialPageRoute(builder: (context) => HomePage()),
                           );
                         },
                       ),
-                      
                     ],
                   ),
                 ],
