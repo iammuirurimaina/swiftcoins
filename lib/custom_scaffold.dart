@@ -14,10 +14,17 @@ class CustomScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Color(0xFFE36F04),
         title: Text(title),
         actions: [
+          IconButton(
+            icon: Icon(Icons.notifications_rounded, color: Colors.white),
+            onPressed: () {
+              // Implement logout functionality
+            },
+          ),
           IconButton(
             icon: Icon(Icons.logout, color: Colors.white),
             onPressed: () {
@@ -38,7 +45,7 @@ class CustomScaffold extends StatelessWidget {
 
   Widget _buildHeader() {
     return Container(
-      padding: EdgeInsets.only(left: 16, right: 16, bottom: 20),
+      padding: EdgeInsets.only(left: 16, right: 16, bottom: 10),
       color: Color(0xFFE36F04),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,7 +96,8 @@ class CustomScaffold extends StatelessWidget {
                   CircleAvatar(
                     radius: 40,
                     backgroundColor: Colors.white,
-                    child: Icon(Icons.person, size: 40, color: Color(0xFFE36F04)),
+                    child:
+                        Icon(Icons.person, size: 40, color: Color(0xFFE36F04)),
                   ),
                   SizedBox(height: 10),
                   Text(
@@ -101,7 +109,8 @@ class CustomScaffold extends StatelessWidget {
             ),
             _buildDrawerItem(context, 'Home', Icons.home, '/'),
             _buildDrawerItem(context, 'Profile', Icons.person, '/profile'),
-            _buildDrawerItem(context, 'Request Loan', Icons.monetization_on, '/request_loan'),
+            _buildDrawerItem(context, 'Request Loan', Icons.monetization_on,
+                '/request_loan'),
             _buildDrawerItem(context, 'Settings', Icons.settings, '/settings'),
             Divider(color: Colors.white54),
             _buildDrawerItem(context, 'Logout', Icons.exit_to_app, '/logout'),
@@ -111,7 +120,8 @@ class CustomScaffold extends StatelessWidget {
     );
   }
 
-  Widget _buildDrawerItem(BuildContext context, String title, IconData icon, String route) {
+  Widget _buildDrawerItem(
+      BuildContext context, String title, IconData icon, String route) {
     return ListTile(
       leading: Icon(icon, color: Colors.white),
       title: Text(title, style: TextStyle(color: Colors.white)),
