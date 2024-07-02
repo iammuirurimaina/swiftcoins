@@ -13,12 +13,15 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:swiftcoins/account_status.dart';
 import 'package:swiftcoins/repay_loan.dart';
+
 
 import 'home.dart';
 import 'login.dart';
 import 'request_loan.dart';
-import 'repay_loan.dart';
+import 'deposit.dart';
+
 
 // TODO: Convert SwiftCoins to stateful widget (104)
 class SwiftCoins extends StatelessWidget {
@@ -35,6 +38,8 @@ class SwiftCoins extends StatelessWidget {
         '/': (BuildContext context) => HomePage(),
         '/request_loan': (context) => const RequestLoan(),
         '/repay_loan' : (context) => const RepayLoan(),
+         '/account_status' : (context) => AccountStatus(),
+         '/deposit': (context) => Deposit(),
 
         // TODO: Make currentCategory field take _currentCategory (104)
         // TODO: Pass _currentCategory for frontLayer (104)
