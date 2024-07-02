@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:swiftcoins/home.dart';
 import 'custom_scaffold.dart';
 
 class RequestLoan extends StatefulWidget {
@@ -137,7 +139,16 @@ class _RequestLoanState extends State<RequestLoan> {
       height: 60,
       child: ElevatedButton(
         onPressed: () {
-          // Implement loan request logic here
+          Fluttertoast.showToast(
+              msg: "Loan Request Received\n You will receive an SMS shortly!",
+              gravity: ToastGravity.CENTER,
+              toastLength: Toast.LENGTH_LONG,
+              fontSize: 15,
+              backgroundColor: Color.fromARGB(255, 227, 112, 5));
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
         },
         child: Text('Continue'),
         style: ElevatedButton.styleFrom(

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:swiftcoins/home.dart';
 import 'custom_scaffold.dart';
 
 class RepayLoan extends StatefulWidget {
   const RepayLoan({Key? key}) : super(key: key);
-  
+
   @override
   _RepayLoanState createState() => _RepayLoanState();
 }
@@ -11,7 +13,8 @@ class RepayLoan extends StatefulWidget {
 class _RepayLoanState extends State<RepayLoan> {
   String? selectedOption;
   final TextEditingController amountController = TextEditingController();
-  final double currentLoan = 10000; // This can be fetched from an API or passed as a parameter
+  final double currentLoan =
+      10000; // This can be fetched from an API or passed as a parameter
 
   final List<String> options = [
     'Full Amount',
@@ -81,7 +84,7 @@ class _RepayLoanState extends State<RepayLoan> {
             ),
             SizedBox(height: 10),
             Text(
-              'Current Loan',
+              'Current Loan Balance',
               style: TextStyle(fontSize: 14, color: Colors.grey),
             ),
             Text(
@@ -148,6 +151,17 @@ class _RepayLoanState extends State<RepayLoan> {
           } else {
             print('Repaying custom amount: ${amountController.text}');
           }
+          Fluttertoast.showToast(
+              msg:
+                  "Your request has been received\n You will receive a request to enter your MPESA PIN shortly!",
+              gravity: ToastGravity.CENTER,
+              toastLength: Toast.LENGTH_LONG,
+              fontSize: 15,
+              backgroundColor: Color.fromARGB(255, 227, 112, 5));
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
         },
         child: Text('Pay Loan'),
         style: ElevatedButton.styleFrom(
