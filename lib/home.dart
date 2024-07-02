@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:swiftcoins/deposit.dart';
 import 'request_loan.dart';
 import 'custom_scaffold.dart';
 import 'repay_loan.dart';
+import 'account_status.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -16,7 +18,7 @@ class HomePage extends StatelessWidget {
         userName: 'Samuel',
         body: Column(
           children: [
-            _buildAccountInfo(),
+            buildAccountInfo(context),
             _buildActionButtons(context),
             _buildBottomNavigation(),
           ],
@@ -64,42 +66,45 @@ class HomePage extends StatelessWidget {
   //   );
   // }
 
-  Widget _buildAccountInfo() {
-    return Container(
-      margin: EdgeInsets.all(16),
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Text(
-            'Account Number',
-            style: TextStyle(fontSize: 14, color: Colors.grey),
-          ),
-          Text(
-            '$account',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 20),
-          Text(
-            'Loan Limit',
-            style: TextStyle(fontSize: 14, color: Colors.grey),
-          ),
-          Text(
-            'KSh $balance',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-        ],
+  Widget buildAccountInfo(BuildContext context) {
+    return Center(
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.8,
+        margin: EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 3),
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            Text(
+              'Account Number',
+              style: TextStyle(fontSize: 14, color: Colors.grey),
+            ),
+            Text(
+              '$account',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Loan Limit',
+              style: TextStyle(fontSize: 14, color: Colors.grey),
+            ),
+            Text(
+              'KSh $balance',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -136,6 +141,19 @@ class HomePage extends StatelessWidget {
             MaterialPageRoute(builder: (context) => RepayLoan()),
           );
         }
+        if (label == 'Account\nStatus') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AccountStatus()),
+          );
+        }
+        if (label == 'Deposit') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Deposit()),
+          );
+        }
+        ;
         // Add other navigation or action logic for other buttons here
       },
       child: Column(
