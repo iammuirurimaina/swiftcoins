@@ -4,6 +4,8 @@ import 'request_loan.dart';
 import 'custom_scaffold.dart';
 import 'repay_loan.dart';
 import 'account_status.dart';
+import 'Withdraw.dart';
+import 'Statement.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -20,7 +22,7 @@ class HomePage extends StatelessWidget {
           children: [
             buildAccountInfo(context),
             _buildActionButtons(context),
-            _buildBottomNavigation(),
+            _buildBottomNavigation(context),
           ],
         ));
   }
@@ -153,6 +155,12 @@ class HomePage extends StatelessWidget {
             MaterialPageRoute(builder: (context) => Deposit()),
           );
         }
+        if (label == 'Withdraw') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Withdraw()),
+          );
+        }
         ;
         // Add other navigation or action logic for other buttons here
       },
@@ -175,7 +183,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildBottomNavigation() {
+  Widget _buildBottomNavigation(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         border: Border(top: BorderSide(color: Colors.grey.shade300)),
@@ -183,35 +191,53 @@ class HomePage extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildNavItem('Home', Icons.home, true),
-          _buildNavItem('Sacco\n360', Icons.group),
-          _buildNavItem('Mini\nStatement', Icons.receipt),
+          _buildNavItem(context, 'Home', Icons.home, true, () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+          }),
+          _buildNavItem(context, 'Sacco\n360', Icons.group, false, () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Statement()),
+            );
+          }),
+          _buildNavItem(context, 'Mini\nStatement', Icons.receipt, false, () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Statement()),
+            );
+          }),
         ],
       ),
     );
   }
 
-  Widget _buildNavItem(String label, IconData icon, [bool isSelected = false]) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, color: isSelected ? Color(0xFFE36F04) : Colors.grey),
-          Text(
-            label,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 12,
-              color: isSelected ? Color(0xFFE36F04) : Colors.black,
-              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+  Widget _buildNavItem(BuildContext context, label, IconData icon,
+      bool isSelected, Function onTap) {
+    return GestureDetector(
+      onTap: () => onTap(),
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 8),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, color: isSelected ? Color(0xFFE36F04) : Colors.grey),
+            Text(
+              label,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 12,
+                color: isSelected ? Color(0xFFE36F04) : Colors.black,
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
-
 
   Widget _buildDrawer(BuildContext context) {
     return Drawer(
